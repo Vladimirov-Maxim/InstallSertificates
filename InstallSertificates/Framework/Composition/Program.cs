@@ -1,14 +1,14 @@
-using InstallSertificates.Core.Domain;
-using InstallSertificates.Core.UseCases;
-using InstallSertificates.Core.UseCases.Ports;
-using InstallSertificates.Infrastructure.Adapters;
-using InstallSertificates.Infrastructure.Repositories;
-using InstallSertificates.InterfaceAdapters.Controllers;
-using InstallSertificates.InterfaceAdapters.Controllers.Ports;
-using InstallSertificates.InterfaceAdapters.Presenters;
+using InstallСertificates.Core.Domain;
+using InstallСertificates.Core.UseCases;
+using InstallСertificates.Core.UseCases.Ports;
+using InstallСertificates.Infrastructure.Adapters;
+using InstallСertificates.Infrastructure.Repositories;
+using InstallСertificates.InterfaceAdapters.Controllers;
+using InstallСertificates.InterfaceAdapters.Controllers.Ports;
+using InstallСertificates.InterfaceAdapters.Presenters;
 using System.Text;
 
-namespace InstallSertificates.Framework.Composition
+namespace InstallСertificates.Framework.Composition
 {
     internal static class Program
     {

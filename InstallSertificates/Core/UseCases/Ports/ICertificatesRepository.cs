@@ -1,6 +1,6 @@
-using InstallSertificates.Core.Domain;
+using InstallСertificates.Core.Domain;
 
-namespace InstallSertificates.Core.UseCases.Ports
+namespace InstallСertificates.Core.UseCases.Ports
 {
     public interface ICertificatesRepository
     {

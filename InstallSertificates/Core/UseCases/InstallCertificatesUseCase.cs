@@ -1,6 +1,6 @@
-using InstallSertificates.Core.UseCases.Ports;
+using InstallСertificates.Core.UseCases.Ports;
 
-namespace InstallSertificates.Core.UseCases
+namespace InstallСertificates.Core.UseCases
 {
     public class InstallCertificatesUseCase : IInstallCertificatesUseCaseInput
     {
@@ -9,9 +9,11 @@ namespace InstallSertificates.Core.UseCases
         private IUSBPortGateway _usbPortGateway;
         private IMainViewOutput _output;
 
-        public InstallCertificatesUseCase(ICertificatesRepository cerRun,
+        public InstallCertificatesUseCase(
+            ICertificatesRepository cerRun,
             ICertificatesGateway certificatesGateway,
-            IUSBPortGateway usbPortGateway, IMainViewOutput output)
+            IUSBPortGateway usbPortGateway,
+            IMainViewOutput output)
         {
             _cerRun = cerRun;
             _certificatesGateway = certificatesGateway;

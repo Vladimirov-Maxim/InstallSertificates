@@ -1,7 +1,7 @@
-using InstallSertificates.Core.UseCases.Ports;
-using InstallSertificates.InterfaceAdapters.Controllers.Ports;
+using InstallСertificates.Core.UseCases.Ports;
+using InstallСertificates.InterfaceAdapters.Controllers.Ports;
 
-namespace InstallSertificates.InterfaceAdapters.Controllers
+namespace InstallСertificates.InterfaceAdapters.Controllers
 {
     public class MainViewController : IMainViewController
     {
@@ -19,15 +19,15 @@ namespace InstallSertificates.InterfaceAdapters.Controllers
             _installCertificates = installCertificates;
         }
 
-        public void Install(string SerialNumber, string nameCer, string FolderCertificates)
+        public void Install(string serialNumber, string nameCer, string folderCertificates)
         {
-            _installCertificates.Install(SerialNumber, nameCer, FolderCertificates);
+            _installCertificates.Install(serialNumber, nameCer, folderCertificates);
         }
 
         public void InstalledCertificates() => _loaderInstalledCertificates.InstalledCertificates();
 
         public void InstalledCertificatesFilter(string query) => _loaderInstalledCertificates.InstalledCertificatesFilter(query);
-
-        public void LoadCertificatesForInstall(string PathFolder) => _loaderCertificatesForInstall.CertificatesForInstall(PathFolder);
+    
+        public void LoadCertificatesForInstall(string pathFolder) => _loaderCertificatesForInstall.CertificatesForInstall(pathFolder);
     }
 }

@@ -1,4 +1,4 @@
-namespace InstallSertificates.Core.Domain
+namespace InstallСertificates.Core.Domain
 {
     public class Certificate
     {

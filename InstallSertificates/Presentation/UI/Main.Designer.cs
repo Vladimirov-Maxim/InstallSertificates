@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace InstallSertificates
+namespace InstallСertificates
 {
     partial class Main
     {

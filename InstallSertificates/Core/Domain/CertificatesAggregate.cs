@@ -1,6 +1,6 @@
-using InstallSertificates.Core.UseCases.Ports;
+using InstallСertificates.Core.UseCases.Ports;
 
-namespace InstallSertificates.Core.Domain
+namespace InstallСertificates.Core.Domain
 {
     public class CertificatesAggregate
     {
@@ -17,7 +17,7 @@ namespace InstallSertificates.Core.Domain
            
         }
 
-        public void LoadCertificatesFofInstall(List<CertificateInfo> certificates)
+        public void LoadCertificatesForInstall(List<CertificateInfo> certificates)
         {
 
             _certificatesForInstall.Clear();
@@ -76,13 +76,13 @@ namespace InstallSertificates.Core.Domain
                 cer.ContainerAddress);
         }
 
-        public void Install(string SerialNumber, string container, string port)
+        public void Install(string serialNumber, string container, string port)
         {
             var cer = _certificatesForInstall.
-                FirstOrDefault(c => string.Equals(c.SerialNumber, SerialNumber, StringComparison.OrdinalIgnoreCase));
+                FirstOrDefault(c => string.Equals(c.SerialNumber, serialNumber, StringComparison.OrdinalIgnoreCase));
 
             if (cer == null)
-                throw new ArgumentException($"Не удалось найти сертификат для установки с номером {SerialNumber}");
+                throw new ArgumentException($"Не удалось найти сертификат для установки с номером {serialNumber}");
 
             cer.Install(container, port);
         }

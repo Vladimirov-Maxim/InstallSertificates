@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text;
 
-namespace InstallSertificates.Infrastructure.Adapters
+namespace InstallСertificates.Infrastructure.Adapters
 {
     public class LocalProcess
     {
@@ -50,7 +50,7 @@ namespace InstallSertificates.Infrastructure.Adapters
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"Ошибка выполнения процесса Distcontrol:\n{ex.Message}.");
+                throw new InvalidOperationException($"Ошибка выполнения процесса:\n{ex.Message}.");
             }
 
         }

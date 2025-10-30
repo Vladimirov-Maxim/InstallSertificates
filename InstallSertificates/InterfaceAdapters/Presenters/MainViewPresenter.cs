@@ -1,6 +1,6 @@
-using InstallSertificates.Core.UseCases.Ports;
+using InstallСertificates.Core.UseCases.Ports;
 
-namespace InstallSertificates.InterfaceAdapters.Presenters
+namespace InstallСertificates.InterfaceAdapters.Presenters
 {
     public class MainViewPresenter : IMainViewPresenter, IMainViewOutput
     {

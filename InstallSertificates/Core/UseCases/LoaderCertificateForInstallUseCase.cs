@@ -1,6 +1,6 @@
-using InstallSertificates.Core.UseCases.Ports;
+using InstallСertificates.Core.UseCases.Ports;
 
-namespace InstallSertificates.Core.UseCases
+namespace InstallСertificates.Core.UseCases
 {
     public class LoaderCertificateForInstallUseCase : ILoaderCertificatesForInstallInput
     {
@@ -30,7 +30,7 @@ namespace InstallSertificates.Core.UseCases
                 return;
 
             var cerRun = _certificatesRepository.Get();
-            cerRun.LoadCertificatesFofInstall(certificates);
+            cerRun.LoadCertificatesForInstall(certificates);
 
             var installedCer = cerRun.GetInstalledCertificates();
             foreach (var cer in certificates)

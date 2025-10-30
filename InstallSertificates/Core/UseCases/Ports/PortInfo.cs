@@ -1,4 +1,4 @@
-namespace InstallSertificates.Core.UseCases.Ports
+namespace InstallСertificates.Core.UseCases.Ports
 {
     public class PortInfo
     {
@@ -7,6 +7,8 @@ namespace InstallSertificates.Core.UseCases.Ports
 
         public PortInfo()
         {
+            address = string.Empty;
+            user = string.Empty;
         }
 
         public PortInfo(string address, string user)

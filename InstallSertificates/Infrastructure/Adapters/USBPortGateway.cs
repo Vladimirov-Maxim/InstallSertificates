@@ -1,8 +1,8 @@
-using InstallSertificates.Core.UseCases.Ports;
+using InstallСertificates.Core.UseCases.Ports;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-namespace InstallSertificates.Infrastructure.Adapters
+namespace InstallСertificates.Infrastructure.Adapters
 {
     public class USBPortGateway : IUSBPortGateway
     {
@@ -10,7 +10,7 @@ namespace InstallSertificates.Infrastructure.Adapters
 
         public USBPortGateway()
         {
-            if (!Path.Exists(exePath))
+            if (!File.Exists(exePath))
                 throw new InvalidOperationException($"Не найден исполняемый файл Distcontrol {exePath}.");
         }
 

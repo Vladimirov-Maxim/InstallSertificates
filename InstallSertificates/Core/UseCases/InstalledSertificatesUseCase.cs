@@ -1,6 +1,6 @@
-using InstallSertificates.Core.UseCases.Ports;
+using InstallСertificates.Core.UseCases.Ports;
 
-namespace InstallSertificates.Core.UseCases
+namespace InstallСertificates.Core.UseCases
 {
     public class InstalledSertificatesUseCase : IInstalledSertificatesUseCaseInput
     {

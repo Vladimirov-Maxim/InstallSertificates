@@ -1,4 +1,4 @@
-namespace InstallSertificates.Core.UseCases.Ports
+namespace InstallСertificates.Core.UseCases.Ports
 {
     public interface IMainViewOutput
     {

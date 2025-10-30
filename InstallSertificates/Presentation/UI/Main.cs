@@ -1,11 +1,11 @@
-using InstallSertificates.Core.UseCases.Ports;
-using InstallSertificates.InterfaceAdapters.Controllers.Ports;
-using InstallSertificates.InterfaceAdapters.Presenters;
+using InstallСertificates.Core.UseCases.Ports;
+using InstallСertificates.InterfaceAdapters.Controllers.Ports;
+using InstallСertificates.InterfaceAdapters.Presenters;
 using System.ComponentModel;
 using static System.Net.Mime.MediaTypeNames;
 using Timer = System.Windows.Forms.Timer;
 
-namespace InstallSertificates
+namespace InstallСertificates
 {
     public partial class Main : Form
     {

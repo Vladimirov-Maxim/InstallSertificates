@@ -1,10 +1,10 @@
-using InstallSertificates.Core.UseCases.Ports;
+using InstallСertificates.Core.UseCases.Ports;
 using System.Diagnostics;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
-namespace InstallSertificates.Infrastructure.Adapters
+namespace InstallСertificates.Infrastructure.Adapters
 {
     public class CryptoProGateway : ICertificatesGateway
     {
@@ -13,7 +13,7 @@ namespace InstallSertificates.Infrastructure.Adapters
 
         public CryptoProGateway()
         {
-            if (!Path.Exists(exePath))
+            if (!File.Exists(exePath))
                 throw new FileNotFoundException($"Не найден исполняемый файл КриптоПро {exePath}.");
         }
 
@@ -72,7 +72,7 @@ namespace InstallSertificates.Infrastructure.Adapters
             var resultProcess = LocalProcess.StartProcess(psi);
 
             if (resultProcess.code != 0)
-                throw new InvalidOperationException($"Ошибка при получения сертификатов CryptoPro {resultProcess.code}: {resultProcess.err_text}");
+                throw new InvalidOperationException($"Ошибка при получения сертификатов КриптоПро {resultProcess.code}: {resultProcess.err_text}");
 
             return resultProcess.out_text;
 
@@ -103,15 +103,15 @@ namespace InstallSertificates.Infrastructure.Adapters
                     subject,
                     TryParseDate(issued),
                     TryParseDate(expires),
-                    serialNumber.Substring(2),
+                    serialNumber.Length <= 2 ? serialNumber : serialNumber.Substring(2),
                     issuer,
                     container,
                     true,
                     "");
-                  
-                    certificates.Add(certificate);
 
-                }
+                certificates.Add(certificate);
+
+            }
 
             return certificates;
         }
@@ -123,7 +123,8 @@ namespace InstallSertificates.Infrastructure.Adapters
 
         }
 
-        private DateTime TryParseDate(string date) {
+        private DateTime TryParseDate(string date)
+        {
 
             try
             {
@@ -135,7 +136,9 @@ namespace InstallSertificates.Infrastructure.Adapters
 
                 return dto.DateTime;
 
-            } catch {
+            }
+            catch
+            {
 
                 return DateTime.MinValue;
 
@@ -144,7 +147,7 @@ namespace InstallSertificates.Infrastructure.Adapters
         }
 
         private List<string> AvailableContainers()
-        
+
         {
             var result = new List<string>();
 
@@ -198,7 +201,7 @@ namespace InstallSertificates.Infrastructure.Adapters
 
             var result = LocalProcess.StartProcess(psi);
             return result.code == 0;
-            
+
         }
 
     }

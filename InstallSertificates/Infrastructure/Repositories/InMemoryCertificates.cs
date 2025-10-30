@@ -1,7 +1,7 @@
-using InstallSertificates.Core.Domain;
-using InstallSertificates.Core.UseCases.Ports;
+using InstallСertificates.Core.Domain;
+using InstallСertificates.Core.UseCases.Ports;
 
-namespace InstallSertificates.Infrastructure.Repositories
+namespace InstallСertificates.Infrastructure.Repositories
 {
     public class InMemoryCertificates : ICertificatesRepository
     {
