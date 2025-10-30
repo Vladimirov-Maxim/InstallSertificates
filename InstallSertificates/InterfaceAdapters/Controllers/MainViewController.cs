@@ -7,26 +7,27 @@ namespace InstallSertificates.InterfaceAdapters.Controllers
     {
         private ILoaderCertificatesForInstallInput _loaderCertificatesForInstall;
         private IInstalledSertificatesUseCaseInput _loaderInstalledCertificates;
+        private IInstallCertificatesUseCaseInput _installCertificates;
 
-        public MainViewController(ILoaderCertificatesForInstallInput loaderCertificatesForInstall, IInstalledSertificatesUseCaseInput loaderInstalledCertificates)
+        public MainViewController(
+            ILoaderCertificatesForInstallInput loaderCertificatesForInstall,
+            IInstalledSertificatesUseCaseInput loaderInstalledCertificates,
+            IInstallCertificatesUseCaseInput installCertificates)
         {
             _loaderCertificatesForInstall = loaderCertificatesForInstall;
             _loaderInstalledCertificates = loaderInstalledCertificates;
+            _installCertificates = installCertificates;
         }
 
-        public void InstalledCertificates()
+        public void Install(string SerialNumber, string nameCer, string FolderCertificates)
         {
-            _loaderInstalledCertificates.InstalledCertificates();
+            _installCertificates.Install(SerialNumber, nameCer, FolderCertificates);
         }
 
-        public void InstalledCertificatesFilter(string query)
-        {
-            _loaderInstalledCertificates.InstalledCertificatesFilter(query);
-        }
+        public void InstalledCertificates() => _loaderInstalledCertificates.InstalledCertificates();
 
-        public void LoadCertificatesForInstall(string PathFolder)
-        {
-            _loaderCertificatesForInstall.CertificatesForInstall(PathFolder);
-        }
+        public void InstalledCertificatesFilter(string query) => _loaderInstalledCertificates.InstalledCertificatesFilter(query);
+
+        public void LoadCertificatesForInstall(string PathFolder) => _loaderCertificatesForInstall.CertificatesForInstall(PathFolder);
     }
 }

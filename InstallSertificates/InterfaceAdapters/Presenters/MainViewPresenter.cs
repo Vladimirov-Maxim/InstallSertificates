@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using InstallSertificates.Core.UseCases.Ports;
 
 namespace InstallSertificates.InterfaceAdapters.Presenters
@@ -10,6 +7,8 @@ namespace InstallSertificates.InterfaceAdapters.Presenters
         
         public event Action<List<CertificateInfo>> PresentInstalledCertificates;
         public event Action<List<CertificateInfo>> PresentCertificatesForInstall;
+        public event Action<string> ShowMessage;
+        public event Action<string> ShowError;
 
         public void ShowCertificatesForInstall(List<CertificateInfo> certificates)
         {
@@ -20,5 +19,10 @@ namespace InstallSertificates.InterfaceAdapters.Presenters
         {
             PresentInstalledCertificates?.Invoke(certificates);
         }
+
+        void IMainViewOutput.ShowError(string text) => ShowError?.Invoke(text);
+
+        void IMainViewOutput.ShowMessage(string text) => ShowMessage?.Invoke(text);
+
     }
 }

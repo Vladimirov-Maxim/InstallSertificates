@@ -1,3 +1,4 @@
+using InstallSertificates.Core.Domain;
 using InstallSertificates.Core.UseCases;
 using InstallSertificates.Core.UseCases.Ports;
 using InstallSertificates.Infrastructure.Adapters;
@@ -5,7 +6,7 @@ using InstallSertificates.Infrastructure.Repositories;
 using InstallSertificates.InterfaceAdapters.Controllers;
 using InstallSertificates.InterfaceAdapters.Controllers.Ports;
 using InstallSertificates.InterfaceAdapters.Presenters;
-using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 
 namespace InstallSertificates.Framework.Composition
 {
@@ -14,38 +15,52 @@ namespace InstallSertificates.Framework.Composition
         [STAThread]
         static void Main()
         {
-            ApplicationConfiguration.Initialize();
+           
+            try
+            {
 
-            var services = new ServiceCollection();
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            // ---------- Presenters ----------
-            // Один экземпляр MainViewPresenter на два интерфейса: IMainViewPresenter и IMainViewOutput
-            services.AddSingleton<MainViewPresenter>();
-            services.AddSingleton<IMainViewPresenter>(sp => sp.GetRequiredService<MainViewPresenter>());
-            services.AddSingleton<IMainViewOutput>(sp => sp.GetRequiredService<MainViewPresenter>());
+                // ---------- Presenters ----------
+                var presenter = new MainViewPresenter();
+                IMainViewPresenter viewPresenter = presenter;
+                IMainViewOutput outputPort = presenter;
 
-            // ---------- Gateways ----------
-            services.AddSingleton<ICertificatesGateway, X509StoreGateway>();
+                // ---------- Gateways ----------
+                ICertificatesGateway certificatesGateway = new CryptoProGateway();
+                IUSBPortGateway usbPortGateway = new USBPortGateway();
 
-            // ---------- Repositories ----------
-            services.AddSingleton<ILoaderCertificateForInstallRepositories, WindowsRepository>();
-            services.AddSingleton<IInstallCertificatesRepository, InMemoryCertificatesForInstall>();
+                // ---------- Repositories ----------
+                ILoaderCertificateForInstallRepositories loaderRepo = new WindowsRepository();
+                ICertificatesRepository cerRun = new InMemoryCertificates();
 
-            // ---------- Use cases (интеракторы) ----------
-            services.AddSingleton<ILoaderCertificatesForInstallInput, LoaderCertificateForInstallUseCase>();
-            services.AddSingleton<IInstalledSertificatesUseCaseInput, InstalledSertificatesUseCase>();
+                // ---------- Aggregates ----------
+                CertificatesAggregate certificatesAggregate = new CertificatesAggregate();
+                cerRun.Save(certificatesAggregate);
 
-            // ---------- Controllers ----------
-            services.AddSingleton<IMainViewController, MainViewController>();
+                // ---------- Use cases (интеракторы) ----------
+                // Порядок аргументов подстрой под реальные конструкторы, идея такая:
+                ILoaderCertificatesForInstallInput loaderUc =
+                    new LoaderCertificateForInstallUseCase(presenter, loaderRepo, certificatesGateway, cerRun);
 
-            // ---------- Forms (UI) ----------
-            services.AddSingleton<Main>();
+                IInstalledSertificatesUseCaseInput installedUc =
+                    new InstalledSertificatesUseCase(presenter, certificatesGateway, cerRun);
 
+                IInstallCertificatesUseCaseInput installCertificates =
+                    new InstallCertificatesUseCase(cerRun, certificatesGateway, usbPortGateway, presenter);
 
-            using var sp = services.BuildServiceProvider();
-            var main = sp.GetRequiredService<Main>();
+                // ---------- Controller ----------
+                IMainViewController controller = new MainViewController(loaderUc, installedUc, installCertificates);
 
-            Application.Run(main);
+                // ---------- UI ----------
+                using var main = new Main(controller, viewPresenter);
+                Application.Run(main);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Startup error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }

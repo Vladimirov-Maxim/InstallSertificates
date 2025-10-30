@@ -5,9 +5,7 @@ namespace InstallSertificates
 {
     partial class Main
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
+
         private System.ComponentModel.IContainer components = null;
 
         // Tabs
@@ -27,7 +25,6 @@ namespace InstallSertificates
         private System.Windows.Forms.Button btnInstall;
 
         private System.Windows.Forms.DataGridView dgvToInstall;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colToInstallSelect;   // чекбокс (первый столбец)
         private System.Windows.Forms.DataGridViewTextBoxColumn colToInstallIndex;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colToInstallFlag;
         private System.Windows.Forms.DataGridViewTextBoxColumn colToInstallName;
@@ -39,7 +36,10 @@ namespace InstallSertificates
 
         // Вкладка "Установленные сертификаты"
         private System.Windows.Forms.Panel panelInstalledTop;
+
         private System.Windows.Forms.Button btnClearSearch;
+        private System.Windows.Forms.Button btnRefresh;
+
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblSearch;
 
@@ -52,11 +52,8 @@ namespace InstallSertificates
         private System.Windows.Forms.DataGridViewTextBoxColumn colInstalledSerial;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInstalledIssuer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInstalledContainer;
+        
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -68,16 +65,11 @@ namespace InstallSertificates
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             tabControlMain = new TabControl();
             tabPageInstall = new TabPage();
             dgvToInstall = new DataGridView();
-            colToInstallSelect = new DataGridViewCheckBoxColumn();
             colToInstallIndex = new DataGridViewTextBoxColumn();
             colToInstallFlag = new DataGridViewCheckBoxColumn();
             colToInstallName = new DataGridViewTextBoxColumn();
@@ -107,6 +99,7 @@ namespace InstallSertificates
             btnClearSearch = new Button();
             txtSearch = new TextBox();
             lblSearch = new Label();
+            btnRefresh = new Button();
             folderBrowserDialog1 = new FolderBrowserDialog();
             tabControlMain.SuspendLayout();
             tabPageInstall.SuspendLayout();
@@ -126,7 +119,7 @@ namespace InstallSertificates
             tabControlMain.Location = new Point(0, 0);
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1280, 720);
+            tabControlMain.Size = new Size(1280, 595);
             tabControlMain.TabIndex = 0;
             // 
             // tabPageInstall
@@ -136,7 +129,7 @@ namespace InstallSertificates
             tabPageInstall.Controls.Add(tlpInstallUpper);
             tabPageInstall.Location = new Point(4, 24);
             tabPageInstall.Name = "tabPageInstall";
-            tabPageInstall.Size = new Size(1272, 692);
+            tabPageInstall.Size = new Size(1272, 567);
             tabPageInstall.TabIndex = 0;
             tabPageInstall.Text = "Установка сертификатов";
             tabPageInstall.UseVisualStyleBackColor = true;
@@ -148,7 +141,7 @@ namespace InstallSertificates
             dgvToInstall.AllowUserToResizeRows = false;
             dgvToInstall.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvToInstall.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dgvToInstall.Columns.AddRange(new DataGridViewColumn[] { colToInstallSelect, colToInstallIndex, colToInstallFlag, colToInstallName, colToInstallPort, colToInstallSubject, colToInstallNotBefore, colToInstallNotAfter, colToInstallSerial });
+            dgvToInstall.Columns.AddRange(new DataGridViewColumn[] { colToInstallIndex, colToInstallFlag, colToInstallName, colToInstallPort, colToInstallSubject, colToInstallNotBefore, colToInstallNotAfter, colToInstallSerial });
             dgvToInstall.Dock = DockStyle.Fill;
             dgvToInstall.EditMode = DataGridViewEditMode.EditOnEnter;
             dgvToInstall.Location = new Point(0, 88);
@@ -156,16 +149,8 @@ namespace InstallSertificates
             dgvToInstall.Name = "dgvToInstall";
             dgvToInstall.RowHeadersVisible = false;
             dgvToInstall.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dgvToInstall.Size = new Size(1272, 604);
+            dgvToInstall.Size = new Size(1272, 479);
             dgvToInstall.TabIndex = 0;
-
-            // 
-            // colToInstallSelect
-            // 
-            colToInstallSelect.FillWeight = 25F;
-            colToInstallSelect.HeaderText = "✓";
-            colToInstallSelect.MinimumWidth = 30;
-            colToInstallSelect.Name = "colToInstallSelect";
             // 
             // colToInstallIndex
             // 
@@ -177,11 +162,13 @@ namespace InstallSertificates
             // 
             // colToInstallFlag
             // 
+            colToInstallFlag.FalseValue = false;
             colToInstallFlag.FillWeight = 60F;
             colToInstallFlag.HeaderText = "Установлен";
             colToInstallFlag.MinimumWidth = 60;
             colToInstallFlag.Name = "colToInstallFlag";
             colToInstallFlag.ReadOnly = true;
+            colToInstallFlag.TrueValue = true;
             // 
             // colToInstallName
             // 
@@ -323,7 +310,7 @@ namespace InstallSertificates
             tabPageInstalled.Controls.Add(panelInstalledTop);
             tabPageInstalled.Location = new Point(4, 24);
             tabPageInstalled.Name = "tabPageInstalled";
-            tabPageInstalled.Size = new Size(1272, 692);
+            tabPageInstalled.Size = new Size(1272, 567);
             tabPageInstalled.TabIndex = 1;
             tabPageInstalled.Text = "Установленные сертификаты";
             tabPageInstalled.UseVisualStyleBackColor = true;
@@ -343,7 +330,7 @@ namespace InstallSertificates
             dgvInstalled.ReadOnly = true;
             dgvInstalled.RowHeadersVisible = false;
             dgvInstalled.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dgvInstalled.Size = new Size(1272, 652);
+            dgvInstalled.Size = new Size(1272, 527);
             dgvInstalled.TabIndex = 0;
             // 
             // colInstalledIndex
@@ -415,6 +402,7 @@ namespace InstallSertificates
             panelInstalledTop.Controls.Add(btnClearSearch);
             panelInstalledTop.Controls.Add(txtSearch);
             panelInstalledTop.Controls.Add(lblSearch);
+            panelInstalledTop.Controls.Add(btnRefresh);
             panelInstalledTop.Dock = DockStyle.Top;
             panelInstalledTop.Location = new Point(0, 0);
             panelInstalledTop.Name = "panelInstalledTop";
@@ -430,7 +418,7 @@ namespace InstallSertificates
             btnClearSearch.FlatAppearance.MouseDownBackColor = Color.FromArgb(224, 224, 224);
             btnClearSearch.FlatAppearance.MouseOverBackColor = Color.FromArgb(240, 240, 240);
             btnClearSearch.FlatStyle = FlatStyle.Flat;
-            btnClearSearch.Location = new Point(1232, 8);
+            btnClearSearch.Location = new Point(1200, 8);
             btnClearSearch.Margin = new Padding(0);
             btnClearSearch.Name = "btnClearSearch";
             btnClearSearch.Size = new Size(32, 24);
@@ -445,7 +433,7 @@ namespace InstallSertificates
             txtSearch.Location = new Point(53, 8);
             txtSearch.Margin = new Padding(8, 6, 8, 6);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(1211, 23);
+            txtSearch.Size = new Size(1179, 23);
             txtSearch.TabIndex = 0;
             // 
             // lblSearch
@@ -459,6 +447,23 @@ namespace InstallSertificates
             lblSearch.Text = "Поиск:";
             lblSearch.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // btnRefresh
+            // 
+            btnRefresh.Cursor = Cursors.Hand;
+            btnRefresh.Dock = DockStyle.Right;
+            btnRefresh.FlatAppearance.BorderColor = Color.Gray;
+            btnRefresh.FlatAppearance.MouseDownBackColor = Color.FromArgb(224, 224, 224);
+            btnRefresh.FlatAppearance.MouseOverBackColor = Color.FromArgb(240, 240, 240);
+            btnRefresh.FlatStyle = FlatStyle.Flat;
+            btnRefresh.Location = new Point(1232, 8);
+            btnRefresh.Margin = new Padding(0);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(32, 24);
+            btnRefresh.TabIndex = 0;
+            btnRefresh.TabStop = false;
+            btnRefresh.Text = "⟳";
+            btnRefresh.UseVisualStyleBackColor = true;
+            // 
             // folderBrowserDialog1
             // 
             folderBrowserDialog1.Description = "Выберите каталог с сертификатами";
@@ -466,7 +471,7 @@ namespace InstallSertificates
             // 
             // Main
             // 
-            ClientSize = new Size(1280, 720);
+            ClientSize = new Size(1280, 595);
             Controls.Add(tabControlMain);
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;

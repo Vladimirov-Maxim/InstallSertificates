@@ -6,6 +6,8 @@ namespace InstallSertificates.InterfaceAdapters.Presenters
     {
         public event Action<List<CertificateInfo>> PresentInstalledCertificates;
         public event Action<List<CertificateInfo>> PresentCertificatesForInstall;
+        public event Action<string> ShowMessage;
+        public event Action<string> ShowError;
 
     }
 }

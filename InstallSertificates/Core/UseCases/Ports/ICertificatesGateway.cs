@@ -4,5 +4,6 @@ namespace InstallSertificates.Core.UseCases.Ports
     {
         public List<CertificateInfo> GetCertificates();
         public CertificateInfo CertificateFromFile(string file);
+        public string Install(string folderCertificates, string nameCer);
     }
 }

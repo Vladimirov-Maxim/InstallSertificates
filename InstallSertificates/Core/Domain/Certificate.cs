@@ -2,45 +2,43 @@ namespace InstallSertificates.Core.Domain
 {
     public class Certificate
     {
-        public string Name { get; init; } = "";
-        public string Subject { get; init; } = "";
-        public DateTime NotBefore { get; init; }
-        public DateTime NotAfter { get; init; }
-        public string SerialNumber { get; init; } = "";
-        public string Issuer { get; init; } = "";
-        public string ContainerAddress { get; init; } = "";
+        public string Name;
+        public string Subject;
+        public string Issuer;
+        public DateTime NotBefore;
+        public DateTime NotAfter;
+        public string SerialNumber;
         public bool Installed;
+        public string USBPort;
+        public string ContainerAddress;
 
-        public Certificate(string subject, string issuer, string name, DateTime notAfter, DateTime notBefore, string serialNumber, bool installed)
+        public Certificate(
+            string name,
+            string subject,
+            string issuer,
+            DateTime notBefore,
+            DateTime notAfter,
+            string serialNumber,
+            bool installed,
+            string uSBPort,
+            string containerAddress)
         {
+            Name = name;
             Subject = subject;
             Issuer = issuer;
-            Name = name;
-            NotAfter = notAfter;
             NotBefore = notBefore;
+            NotAfter = notAfter;
             SerialNumber = serialNumber;
             Installed = installed;
+            USBPort = uSBPort;
+            ContainerAddress = containerAddress;
         }
 
-        public void Install()
+        public void Install(string container, string port)
         {
             Installed = true;
-        }
-
-        public override bool Equals(object? obj)
-        {
-            return obj is Certificate info &&
-                   Subject == info.Subject &&
-                   Issuer == info.Issuer &&
-                   Name == info.Name &&
-                   NotAfter == info.NotAfter &&
-                   NotBefore == info.NotBefore &&
-                   SerialNumber == info.SerialNumber;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Subject, Issuer, Name, NotAfter, NotBefore, SerialNumber);
+            ContainerAddress = container;
+            USBPort = port;
         }
     }
 }
